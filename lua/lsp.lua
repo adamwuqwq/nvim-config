@@ -1,8 +1,8 @@
-local lsp_keymap = require('setup.lsp_keymaps')
+local lsp_keymap = require('keymap.lsp_keymaps')
 
 local coq = require "coq" -- add this
 
---example config:
+-- example setup:
 --[[
 require('lspconfig')['pyright'].setup
 {
@@ -11,9 +11,12 @@ require('lspconfig')['pyright'].setup
 }
 --]]
 
-
-vim.g.coq_settings.keymap.manual_complete = "tab"
 vim.o.updatetime = 1
+
+vim.cmd
+[[
+	autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+]]
 
 local border = {
 	{ "🭽", "FloatBorder" },
@@ -79,6 +82,7 @@ vim.cmd [[
   highlight DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
   highlight DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
   highlight DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
+
   sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
   sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
   sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
